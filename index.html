@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shree Saraswati English Boarding School</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --deep: #1a0a3c;
+      --purple: #4a2a8a;
+      --gold: #c8972a;
+      --gold-light: #f0c050;
+      --cream: #faf6ef;
+      --muted: #7a6a9a;
+      --white: #ffffff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      background: var(--cream);
+      color: var(--deep);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── background pattern ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(74, 42, 138, 0.07) 0%, transparent 50%),
+        radial-gradient(circle at 85% 80%, rgba(200, 151, 42, 0.07) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+
+    /* ── top divider ── */
+    .top-bar {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 3.5rem auto 2.5rem;
+      border-radius: 2px;
+      animation: growBar 1s ease forwards;
+      transform-origin: left;
+    }
+
+    @keyframes growBar {
+      from {
+        transform: scaleX(0);
+        opacity: 0;
+      }
+
+      to {
+        transform: scaleX(1);
+        opacity: 1;
+      }
+    }
+
+    /* ── logo ring ── */
+    .logo-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.9s ease 0.2s both;
+    }
+
+    .logo-ring {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(200, 151, 42, 0.35);
+      animation: spinRing 30s linear infinite;
+    }
+
+    @keyframes spinRing {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .logo-img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 3px solid rgba(200, 151, 42, 0.4);
+    }
+
+    /* ── school name ── */
+    .school-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--deep);
+      animation: fadeUp 0.9s ease 0.35s both;
+      letter-spacing: -0.01em;
+    }
+
+    .school-name span {
+      color: var(--purple);
+    }
+
+    .tagline {
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.6rem;
+      font-weight: 500;
+      animation: fadeUp 0.9s ease 0.45s both;
+    }
+
+    /* ── divider ornament ── */
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 2.2rem auto;
+      animation: fadeUp 0.9s ease 0.5s both;
+    }
+
+    .ornament::before,
+    .ornament::after {
+      content: '';
+      height: 1px;
+      width: 70px;
+      background: linear-gradient(to right, transparent, rgba(74, 42, 138, 0.25));
+    }
+
+    .ornament::after {
+      transform: scaleX(-1);
+    }
+
+    .ornament-diamond {
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    /* ── headline ── */
+    .headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 2.1rem);
+      font-weight: 600;
+      color: var(--purple);
+      line-height: 1.3;
+      animation: fadeUp 0.9s ease 0.55s both;
+    }
+
+    .sub {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 520px;
+      margin: 1.1rem auto 0;
+      font-weight: 300;
+      animation: fadeUp 0.9s ease 0.65s both;
+    }
+
+    /* ── cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+      margin: 3rem auto;
+      max-width: 600px;
+      animation: fadeUp 0.9s ease 0.75s both;
+    }
+
+    @media (max-width: 480px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(74, 42, 138, 0.1);
+      border-radius: 16px;
+      padding: 1.6rem 1.4rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(74, 42, 138, 0.1);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple), var(--gold));
+      border-radius: 16px 16px 0 0;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.7rem;
+      display: block;
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+
+    .card:nth-child(2) .card-icon {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes floatIcon {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--deep);
+      margin-bottom: 0.35rem;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── progress dots ── */
+    .progress-section {
+      margin: 0 auto 3rem;
+      max-width: 420px;
+      animation: fadeUp 0.9s ease 0.85s both;
+    }
+
+    .progress-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--purple);
+      opacity: 0.15;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    .dot:nth-child(1) {
+      opacity: 0.9;
+      animation-delay: 0s;
+    }
+
+    .dot:nth-child(2) {
+      opacity: 0.65;
+      animation-delay: 0.3s;
+    }
+
+    .dot:nth-child(3) {
+      opacity: 0.4;
+      animation-delay: 0.6s;
+    }
+
+    .dot:nth-child(4) {
+      opacity: 0.2;
+      animation-delay: 0.9s;
+    }
+
+    .dot:nth-child(5) {
+      opacity: 0.1;
+      animation-delay: 1.2s;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.35);
+      }
+    }
+
+    /* ── notify strip ── */
+    .notify {
+      background: var(--white);
+      border: 1px solid rgba(74, 42, 138, 0.12);
+      border-radius: 50px;
+      padding: 0.9rem 1.6rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.9s ease 0.95s both;
+      transition: box-shadow 0.3s;
+    }
+
+    .notify:hover {
+      box-shadow: 0 4px 20px rgba(74, 42, 138, 0.1);
+    }
+
+    .notify-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      animation: blink 1.8s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    /* ── contact-info ── */
+    .contact-info {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 3.5rem;
+      animation: fadeUp 0.9s ease 1s both;
+    }
+
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.6rem 1.4rem;
+      background: rgba(74, 42, 138, 0.04);
+      border-radius: 50px;
+      border: 1px solid rgba(74, 42, 138, 0.08);
+    }
+
+    .contact-item:hover {
+      color: var(--gold);
+      transform: translateY(-2px);
+      background: rgba(74, 42, 138, 0.08);
+      border-color: rgba(200, 151, 42, 0.35);
+      box-shadow: 0 6px 20px rgba(74, 42, 138, 0.08);
+    }
+
+    .contact-icon {
+      width: 16px;
+      height: 16px;
+      stroke-width: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .contact-info {
+        flex-direction: column;
+        gap: 0.8rem;
+        width: 100%;
+        padding: 0 1rem;
+      }
+      .contact-item {
+        width: 100%;
+        max-width: 340px;
+        justify-content: center;
+      }
+    }
+
+    /* ── footer ── */
+    .footer {
+      border-top: 1px solid rgba(74, 42, 138, 0.1);
+      padding: 1.4rem 0 2.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      animation: fadeUp 0.9s ease 1.05s both;
+    }
+
+    .footer strong {
+      color: var(--purple);
+      font-weight: 500;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="top-bar"></div>
+
+    <div class="logo-wrap">
+      <div class="logo-ring"></div>
+      <img class="logo-img" src="logo.jpg" alt="Shree Saraswati English Boarding School Logo"
+        onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='flex'">
+      <div class="logo-fallback"
+        style="display:none; width:130px; height:130px; border-radius:50%; background:var(--purple); align-items:center; justify-content:center; border:3px solid rgba(200,151,42,0.4);">
+        <span style="font-family:'Cormorant Garamond',serif; font-size:2.5rem; color:var(--gold-light);">स</span>
+      </div>
+    </div>
+
+    <h1 class="school-name">
+      Shree Saraswati<br><span>English Boarding School</span>
+    </h1>
+    <p class="tagline">Miklajung-8, Morang &nbsp;·&nbsp; Estd. 2059 &nbsp;·&nbsp; Education For Empowerment</p>
+
+    <div class="ornament">
+      <div class="ornament-diamond"></div>
+    </div>
+
+    <h2 class="headline">Something wonderful<br>is on its way</h2>
+    <p class="sub">
+      We are busy building a digital home for our school. A full website and mobile app to keep students, parents, and
+      staff connected like never before.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon"><img src="website.svg" width="60" height="60" alt="" srcset=""></span>
+        <div class="card-title">School Website</div>
+        <div class="card-desc">Admissions, academics, notices, galleries, and everything about our school, all in one
+          place.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon"><img src="app.svg" width="60" height="60" alt="" srcset=""></span>
+        <div class="card-title">Mobile App</div>
+        <div class="card-desc">Stay in the loop with attendance, results, announcements, and direct teacher
+          communication.</div>
+      </div>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-label">Development in progress</div>
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+    <div class="notify">
+      <div class="notify-dot"></div>
+      We'll be live soon | Thank you for your patience
+    </div>
+
+    <div class="contact-info">
+      <a href="tel:9806096263" class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        <span>9806096263</span>
+      </a>
+      <a href="mailto:saraswatiboardingschool2059@gmail.com" class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <span>saraswatiboardingschool2059@gmail.com</span>
+      </a>
+    </div>
+
+    <div class="footer">
+      &copy; 2025 <strong>Shree Saraswati English Boarding School</strong> &nbsp;·&nbsp; Miklajung-8, Morang, Nepal
+    </div>
+  </div>
+</body>
+
+</html>
